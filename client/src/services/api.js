@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base API client
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api' || 'https://stock-analyzer-1-owo0.onrender.com/api',
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
 });
