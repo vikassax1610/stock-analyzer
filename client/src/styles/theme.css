@@ -1,0 +1,81 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   theme.css — Global Design System Tokens
+   All colors, spacing, and design decisions live here.
+   Changing ONE variable updates the entire application.
+───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Background ── */
+  --bg: #0B0F19;
+  --bg-secondary: #0F1624;
+  --bg-tertiary: #131A2A;
+
+  /* ── Cards & Surfaces ── */
+  --card: #131A2A;
+  --card-hover: #192135;
+  --card-elevated: #1A2236;
+
+  /* ── Borders ── */
+  --border: #1F2937;
+  --border-light: #243044;
+  --border-focus: #3B82F6;
+
+  /* ── Text ── */
+  --text: #F0F4FF;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0B0F19;
+
+  /* ── Brand / Primary ── */
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-dim: rgba(59, 130, 246, 0.15);
+  --primary-glow: rgba(59, 130, 246, 0.3);
+
+  /* ── Status Colors ── */
+  --success: #22C55E;
+  --success-hover: #16A34A;
+  --success-dim: rgba(34, 197, 94, 0.12);
+  --success-glow: rgba(34, 197, 94, 0.25);
+
+  --danger: #EF4444;
+  --danger-hover: #DC2626;
+  --danger-dim: rgba(239, 68, 68, 0.12);
+  --danger-glow: rgba(239, 68, 68, 0.25);
+
+  --warning: #F59E0B;
+  --warning-hover: #D97706;
+  --warning-dim: rgba(245, 158, 11, 0.12);
+  --warning-glow: rgba(245, 158, 11, 0.25);
+
+  --info: #06B6D4;
+  --info-dim: rgba(6, 182, 212, 0.12);
+
+  /* ── Hold / Neutral ── */
+  --neutral: #94A3B8;
+  --neutral-dim: rgba(148, 163, 184, 0.12);
+
+  /* ── Design ── */
+  --radius: 16px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow-primary: 0 0 24px rgba(59, 130, 246, 0.2);
+  --shadow-glow-success: 0 0 24px rgba(34, 197, 94, 0.2);
+  --shadow-glow-danger: 0 0 24px rgba(239, 68, 68, 0.2);
+
+  /* ── Glassmorphism ── */
+  --glass: rgba(19, 26, 42, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  /* ── Fonts ── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
