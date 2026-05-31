@@ -15,6 +15,8 @@ import watchlistRoutes from './routes/watchlistRoutes.js';
 import signalRoutes from './routes/signalRoutes.js';
 import optionsRoutes from './routes/optionsRoutes.js';
 import recommendationsRoutes from './routes/recommendationsRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import authMiddleware from './middlewares/authMiddleware.js';
 
 // ─── App Setup ────────────────────────────────────────────────────────────────
 const app = express();
@@ -33,12 +35,15 @@ app.use(requestLogger);
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
-app.use('/api/stock', stockRoutes);
-app.use('/api/market', marketRoutes);
-app.use('/api/market', recommendationsRoutes);
-app.use('/api/watchlist', watchlistRoutes);
-app.use('/api/signals', signalRoutes);
-app.use('/api/options', optionsRoutes);
+app.use('/api/auth', authRoutes);
+
+// Protected routes (require auth token)
+app.use('/api/stock', authMiddleware, stockRoutes);
+app.use('/api/market', authMiddleware, marketRoutes);
+app.use('/api/market', authMiddleware, recommendationsRoutes);
+app.use('/api/watchlist', authMiddleware, watchlistRoutes);
+app.use('/api/signals', authMiddleware, signalRoutes);
+app.use('/api/options', authMiddleware, optionsRoutes);
 
 // 404 handler
 app.use((req, res) => {

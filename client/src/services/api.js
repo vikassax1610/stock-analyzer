@@ -7,10 +7,30 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Response interceptor — unwrap data
+// Request interceptor — attach token if it exists
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Response interceptor — unwrap data and handle auth errors
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+      // Redirect to login if not already on the login page
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login';
+      }
+    }
     const message =
       error.response?.data?.error ||
       error.response?.data?.message ||
@@ -79,6 +99,11 @@ export const addToWatchlistAPI = (symbol, companyName = '') =>
 
 export const removeFromWatchlistAPI = (symbol) =>
   api.delete(`/watchlist/${encodeURIComponent(symbol)}`);
+
+// ─── Auth APIs ────────────────────────────────────────────────────────────────
+
+export const loginAPI = (email, password) =>
+  api.post('/auth/login', { email, password });
 
 export default api;
 
