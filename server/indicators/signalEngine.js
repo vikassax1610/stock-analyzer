@@ -41,7 +41,7 @@ export const generateSignal = (symbol, currentPrice, currentVolume, candles) => 
   const priceAboveEma50 = ema50 !== null && currentPrice > ema50;
   const ema20AboveEma50 = ema20 !== null && ema50 !== null && ema20 > ema50;
 
-  const rsiBullish = rsi !== null && rsi > 55;
+  const rsiBullish = rsi !== null && rsi > 50;
   const rsiBearish = rsi !== null && rsi < 45;
   const rsiNeutral = rsi !== null && rsi >= 45 && rsi <= 55;
 
@@ -54,7 +54,6 @@ export const generateSignal = (symbol, currentPrice, currentVolume, candles) => 
     ema20AboveEma50,
     rsiBullish,
     macdBullish,
-    volSpike,
   ];
 
   const sellConditions = [
@@ -69,7 +68,7 @@ export const generateSignal = (symbol, currentPrice, currentVolume, candles) => 
   const sellScore = sellConditions.filter(Boolean).length;
 
   let signal;
-  if (buyScore >= 3 && buyScore > sellScore) {
+  if (buyScore >= 2 && buyScore > sellScore) {
     signal = 'BUY';
   } else if (sellScore >= 3 && sellScore > buyScore) {
     signal = 'SELL';
@@ -178,7 +177,7 @@ const buildReasons = ({
   }
 
   if (rsiBullish) {
-    reasons.push(`✓ RSI at ${rsi?.toFixed(1)} — bullish momentum (>55)`);
+    reasons.push(`✓ RSI at ${rsi?.toFixed(1)} — bullish momentum (>50)`);
   } else if (rsiBearish) {
     reasons.push(`✗ RSI at ${rsi?.toFixed(1)} — bearish momentum (<45)`);
   } else {
